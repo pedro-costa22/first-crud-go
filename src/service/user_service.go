@@ -4,16 +4,23 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/pedro-costa22/first-crud-go/src/common/interfaces"
 	"github.com/pedro-costa22/first-crud-go/src/common/request"
 	"github.com/pedro-costa22/first-crud-go/src/config/database/entity"
+	"github.com/pedro-costa22/first-crud-go/src/repository"
 )
 
+type IUserService interface {
+	Create(req request.UserCreateRequest) (*entity.UserEntity, error)
+	FindByID(id string) (entity.UserEntity, error) 
+	FindByEmail(email string) (entity.UserEntity, error) 
+	Update(id string, updates map[string]interface{}) (entity.UserEntity, error) 
+	Delete(id string) error
+}
 type UserService struct {
-	userRepository interfaces.IUserRepository
+	userRepository repository.IUserRepository
 }
 
-func NewUserService(r interfaces.IUserRepository) *UserService {
+func NewUserService(r repository.IUserRepository) *UserService {
 	return &UserService{userRepository: r}
 }
 

@@ -5,6 +5,14 @@ import (
 	"gorm.io/gorm"
 )
 
+type IUserRepository interface {
+	Save(user *entity.UserEntity) error
+	FindByID(id string) (entity.UserEntity, error) 
+	FindByEmail(email string) (entity.UserEntity, error) 
+	Update(id string, updates map[string]interface{}) error
+	Delete(id string) error
+}
+
 type UserRepository struct {
 	DB *gorm.DB
 }

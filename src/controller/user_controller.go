@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/pedro-costa22/first-crud-go/src/common/interfaces"
 	"github.com/pedro-costa22/first-crud-go/src/common/request"
 	"github.com/pedro-costa22/first-crud-go/src/config/logger"
 	"github.com/pedro-costa22/first-crud-go/src/config/rest_err"
 	"github.com/pedro-costa22/first-crud-go/src/config/validation"
+	"github.com/pedro-costa22/first-crud-go/src/service"
 	"github.com/pedro-costa22/first-crud-go/src/view"
 )
 
 type UserController struct {
-	userService interfaces.IUserService
+	userService service.IUserService
 }
 
-func NewUserController(service interfaces.IUserService) *UserController {
+func NewUserController(service service.IUserService) *UserController {
 	return &UserController{userService: service}
 }
 
