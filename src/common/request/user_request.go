@@ -6,3 +6,9 @@ type UserCreateRequest struct {
 	Name     string `json:"name" binding:"required,min=4,max=100"`
 	Age      int8   `json:"age" binding:"required,numeric,min=1,max=140"`
 }
+
+type UserUpdateRequest struct {
+	Name  *string `json:"name,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Age   *int    `json:"age,omitempty"`
+}

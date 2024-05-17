@@ -13,9 +13,9 @@ func UserRoutes(r *gin.RouterGroup, db *gorm.DB) {
 	service := service.NewUserService(repository)
 	controller := controller.NewUserController(service)
 
-	r.GET("/getUserById/:id", controller.FindByID)
+	r.GET("/:id", controller.FindByID)
 	r.GET("/getUserByEmail/:email", controller.FindByEmail)
 	r.POST("/", controller.Create)
-	r.PUT("/:id", controller.Update)
+	r.PATCH("/:id", controller.Update)
 	r.DELETE("/:id", controller.Delete)
 }

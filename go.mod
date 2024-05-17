@@ -7,7 +7,11 @@ require (
 	gorm.io/gorm v1.25.10
 )
 
-require github.com/go-sql-driver/mysql v1.7.0 // indirect
+require (
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
+	go.uber.org/multierr v1.11.0 // indirect
+	go.uber.org/zap v1.27.0 // indirect
+)
 
 require (
 	github.com/bytedance/sonic v1.11.6 // indirect

@@ -1,6 +1,9 @@
 package service
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/pedro-costa22/first-crud-go/src/common/interfaces"
 	"github.com/pedro-costa22/first-crud-go/src/common/request"
 	"github.com/pedro-costa22/first-crud-go/src/config/database/entity"
@@ -26,7 +29,6 @@ func (u *UserService) Create(req request.UserCreateRequest) (*entity.UserEntity,
 		return nil, err
 	}
 
-	// TO DO: VALIDAR SE EMAIL JÁ EXISTE, CASO SIM RETORNAR ERROR, CASO NÃO REALIZAR A CRIAÇÃO
 	err = u.userRepository.Save(user)
 	if err != nil {
 		return nil, err
@@ -35,18 +37,48 @@ func (u *UserService) Create(req request.UserCreateRequest) (*entity.UserEntity,
 	return user, nil
 }
 
-func (u *UserService) FindByID() error {
-	return nil
+func (u *UserService) FindByID(id string) (entity.UserEntity, error)  {
+	user, err := u.userRepository.FindByID(id)
+	fmt.Println(user)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
 }
 
-func (u *UserService) FindByEmail() error {
-	return nil
+func (u *UserService) FindByEmail(email string) (entity.UserEntity, error)  {
+	user, err := u.userRepository.FindByEmail(email) 
+	if err != nil {
+		return user, err
+	}
+	return user, nil
 }
 
-func (u *UserService) Update() error {
-	return nil
+func (u *UserService) Update(id string, updates map[string]interface{}) (entity.UserEntity, error)  {
+	user, err := u.FindByID(id)
+	if err != nil {
+		return user, errors.New("User not found")
+	}
+	
+	err = u.userRepository.Update(id, updates)
+	if err != nil {
+		return user, err
+	}
+
+	user, _ = u.FindByID(id)
+	return user, nil
 }
 
-func (u *UserService) Delete() error {
+func (u *UserService) Delete(id string) error {
+	_, err := u.FindByID(id)
+	if err != nil {
+		return errors.New("User not found")
+	}
+
+	err = u.userRepository.Delete(id)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

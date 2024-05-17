@@ -6,13 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	config "github.com/pedro-costa22/first-crud-go/src/config/database"
+	"github.com/pedro-costa22/first-crud-go/src/config/logger"
 	"github.com/pedro-costa22/first-crud-go/src/routes"
 )
 
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		logger.Error("Error loading .env file", err)
 	}
 
 	db := config.DatabaseConnection()

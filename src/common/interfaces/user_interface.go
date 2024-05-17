@@ -7,16 +7,16 @@ import (
 
 type IUserService interface {
 	Create(req request.UserCreateRequest) (*entity.UserEntity, error)
-	FindByID() error
-	FindByEmail() error
-	Update() error
-	Delete() error
+	FindByID(id string) (entity.UserEntity, error) 
+	FindByEmail(email string) (entity.UserEntity, error) 
+	Update(id string, updates map[string]interface{}) (entity.UserEntity, error) 
+	Delete(id string) error
 }
 
 type IUserRepository interface {
 	Save(user *entity.UserEntity) error
-	FindByID() 
-	FindByEmail() 
-	Update() 
-	Delete() 
+	FindByID(id string) (entity.UserEntity, error) 
+	FindByEmail(email string) (entity.UserEntity, error) 
+	Update(id string, updates map[string]interface{}) error
+	Delete(id string) error
 }
