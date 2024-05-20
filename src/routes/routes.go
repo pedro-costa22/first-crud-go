@@ -7,5 +7,6 @@ import (
 
 func InitRoutes(router *gin.Engine, db *gorm.DB) {
 	UserRoutes(router.Group("/users"), db)
+	AuthRoutes(router, db)
 }
 
