@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/pedro-costa22/first-crud-go/src/common/middleware"
 	"github.com/pedro-costa22/first-crud-go/src/controller"
 	"github.com/pedro-costa22/first-crud-go/src/repository"
 	"github.com/pedro-costa22/first-crud-go/src/service"
@@ -13,9 +14,9 @@ func UserRoutes(r *gin.RouterGroup, db *gorm.DB) {
 	service := service.NewUserService(repository)
 	controller := controller.NewUserController(service)
 
-	r.GET("/:id", controller.FindByID)
-	r.GET("/getUserByEmail/:email", controller.FindByEmail)
+	r.GET("/:id", middleware.VerifyTokenMiddleware ,controller.FindByID)
+	r.GET("/getUserByEmail/:email", middleware.VerifyTokenMiddleware, controller.FindByEmail)
 	r.POST("/", controller.Create)
-	r.PATCH("/:id", controller.Update)
-	r.DELETE("/:id", controller.Delete)
+	r.PATCH("/:id", middleware.VerifyTokenMiddleware, controller.Update)
+	r.DELETE("/:id", middleware.VerifyTokenMiddleware, controller.Delete)
 }
