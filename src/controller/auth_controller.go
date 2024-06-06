@@ -23,6 +23,19 @@ func NewAuthController(service service.IUserService) *AuthController {
 	return &AuthController{userService: service}
 }
 
+// Login
+// @Summary Login
+// @Description Authenticate user with provided email and password
+// @Tags Authentication
+// @Accept json
+// @Produce json
+// @Param login body request.UserLoginRequest true "User login credentials"
+// @Success 200 {object} response.LoginResponse
+// @Failure 400 {object} rest_err.RestErr
+// @Failure 401 {object} rest_err.RestErr
+// @Failure 404 {object} rest_err.RestErr
+// @Failure 500 {object} rest_err.RestErr
+// @Router /login [post]
 func (a *AuthController) Login(c *gin.Context) {
 	var req request.UserLoginRequest
 

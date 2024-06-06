@@ -25,7 +25,7 @@ func DatabaseConnection() *gorm.DB {
 
 	db, err := gorm.Open(mysql.Open(sqlInfo), &gorm.Config{})
 	if err != nil {
-        panic("failed to connect database")
+        panic(err)
     }
 	
 	fmt.Print("Conexão com o banco bem sucessida!")

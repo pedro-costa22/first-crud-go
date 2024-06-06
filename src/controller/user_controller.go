@@ -21,6 +21,17 @@ func NewUserController(service service.IUserService) *UserController {
 	return &UserController{userService: service}
 }
 
+// Create a new user
+// @Summary Create a new user
+// @Description Create a new user with the provided user information
+// @Tags Users
+// @Accept json
+// @Produce json
+// @param request body  request.UserCreateRequest true "User Data for create"
+// @Success 200 {object} response.UserCreateResponse
+// @Failure 400 {object} rest_err.RestErr
+// @Failure 500 {object} rest_err.RestErr
+// @Router /users [post]
 func (u *UserController) Create(c *gin.Context) {
 	var req request.UserCreateRequest
 
@@ -54,6 +65,18 @@ func (u *UserController) Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, view.CreateUserView(*user));
 }
 
+// Find a user by ID
+// @Summary Find a user by ID
+// @Description Retrieve a user's information by their ID
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path string true "User ID"
+// @Security Bearer
+// @Success 200 {object} response.UserCreateResponse
+// @Failure 404 {object} rest_err.RestErr
+// @Failure 500 {object} rest_err.RestErr
+// @Router /users/{id} [get]
 func (u *UserController) FindByID(c *gin.Context) {
 	id := c.Param("id")
 	user, err := u.userService.FindByID(id)
@@ -67,6 +90,18 @@ func (u *UserController) FindByID(c *gin.Context) {
 	c.JSON(http.StatusOK, view.CreateUserView(user))
 }
 
+// Find a user by Email
+// @Summary Find a user by Email
+// @Description Retrieve a user's information by their ID
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param email path string true "User email"
+// @Security Bearer
+// @Success 200 {object} response.UserCreateResponse
+// @Failure 404 {object} rest_err.RestErr
+// @Failure 500 {object} rest_err.RestErr
+// @Router /getUserByEmail/{email} [get] 
 func (u *UserController) FindByEmail(c *gin.Context) {
 	email := c.Param("email")
 	user, err := u.userService.FindByEmail(email)
@@ -80,6 +115,19 @@ func (u *UserController) FindByEmail(c *gin.Context) {
 	c.JSON(http.StatusOK, view.CreateUserView(user))
 }
 
+// User Updated 
+// @Summary User Updated
+// @Description Retrieve a user's information by their ID
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path string true "User ID"
+// @param request body  request.UserUpdateRequest true "User Data for update"
+// @Security Bearer
+// @Success 200 {object} response.UserCreateResponse
+// @Failure 404 {object} rest_err.RestErr
+// @Failure 500 {object} rest_err.RestErr
+// @Router /users/{id} [patch]
 func (u *UserController) Update(c *gin.Context) {
     var updates map[string]interface{}
     if err := c.ShouldBindJSON(&updates); err != nil {
@@ -100,6 +148,18 @@ func (u *UserController) Update(c *gin.Context) {
     c.JSON(http.StatusOK, view.CreateUserView(user))
 }
 
+// User delete 
+// @Summary User delete
+// @Description Retrieve a user's information by their ID
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path string true "User ID"
+// @Security Bearer
+// @Success 200 {int} http.StatusNoContent
+// @Failure 404 {object} rest_err.RestErr
+// @Failure 500 {object} rest_err.RestErr
+// @Router /users/{id} [delete]
 func (u *UserController) Delete(c *gin.Context) {
 	id := c.Param("id")
 	err := u.userService.Delete(id)

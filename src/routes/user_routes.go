@@ -16,7 +16,7 @@ func UserRoutes(r *gin.RouterGroup, db *gorm.DB) {
 
 	r.GET("/:id", middleware.VerifyTokenMiddleware ,controller.FindByID)
 	r.GET("/getUserByEmail/:email", middleware.VerifyTokenMiddleware, controller.FindByEmail)
-	r.POST("/", controller.Create)
+	r.POST("", controller.Create)
 	r.PATCH("/:id", middleware.VerifyTokenMiddleware, controller.Update)
 	r.DELETE("/:id", middleware.VerifyTokenMiddleware, controller.Delete)
 }
