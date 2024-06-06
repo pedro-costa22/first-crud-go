@@ -41,4 +41,17 @@ cd first-crud-go
 docker-compose up -d
 ```
 
+## Documentação da API
+
+Após executar o projeto, você pode acessar a documentação dos endpoints da API através do seguinte link:
+
+```bash
+http://localhost:PORT/swagger/index.html
+```
+
+Obs: Troque "PORT" pela porta que escolheu para rodar sua aplicação, Exemplo: 8000, 8080, 3000 ...
+
+Isso irá fornecer uma interface interativa onde você pode explorar e testar os endpoints disponíveis.
+
+
 
