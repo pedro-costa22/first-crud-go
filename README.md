@@ -53,5 +53,6 @@ Obs: Troque "PORT" pela porta que escolheu para rodar sua aplicação, Exemplo: 
 
 Isso irá fornecer uma interface interativa onde você pode explorar e testar os endpoints disponíveis.
 
+![image](https://github.com/pedro-costa22/first-crud-go/assets/89493619/32515f18-ea8c-4828-b6c4-a1a633523f43)
 
 
