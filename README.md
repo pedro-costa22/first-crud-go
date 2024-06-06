@@ -1,4 +1,4 @@
-# Simple CRUD and Authentication with Go
+# CRUD e Autenticação com Go
 
 Este é um projeto de CRUD simples para cadastro de usuário e autenticação em Go, com utilização de JWT para autenticação e Docker para a configuração do ambiente.
 
