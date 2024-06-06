@@ -14,7 +14,7 @@ services:
       MYSQL_DATABASE: "${DB_NAME}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     ports:
-      - 3306:3306
+      - "3306:3306"
     networks:
       - firstcrud_network
 
@@ -32,11 +32,10 @@ services:
       WEB_SERVER_PORT: 8000
       JWT_SECRET: 0ecbc0de-a73b-429c-bb0f-e23620dbcd79
       JWT_EXPIRES_IN: 24
+    restart: always
     ports:
-      - 8000:8000
+      - "8000:8000" 
     depends_on:
       - mysql
     networks:
       - firstcrud_network
-
-  

@@ -17,6 +17,6 @@ FROM golang:1.22-alpine AS RUNNER
 COPY --from=BUILDER /app/meuprimeirocrudgo .
 COPY --from=BUILDER /app/.env .env
 
-EXPOSE 8080
+EXPOSE 8000
 
 CMD [ "./meuprimeirocrudgo" ]
